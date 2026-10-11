@@ -174,6 +174,57 @@ main[data-pg=contact][data-loop] .ct,main[data-pg=queue][data-loop] .q .bd{--amp
 #modal[data-loop] .md .wt{--amp:.6}
 main[data-pg=calendar][data-loop] .ev:hover,#modal[data-loop] .md .wt:hover{animation-play-state:paused!important}
 }
+/* ===== v3: queue hover + status badges, uniform commission cards, itemised calculator ===== */
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* queue card */
+.q{--sc:#334155;border-left:4px solid var(--sc);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease,background-color .22s ease}
+.q.s-waiting{--sc:#4b5563}.q.s-progress{--sc:#1d4ed8}.q.s-sketch{--sc:#0e7490}.q.s-line{--sc:#4338ca}.q.s-color{--sc:#7e22ce}.q.s-render{--sc:#be185d}.q.s-review{--sc:#b45309}.q.s-revision{--sc:#c2410c}.q.s-done{--sc:#15803d}.q.s-hold{--sc:#4b5563}.q.s-cancel{--sc:#b91c1c}
+.q .bd{display:inline-flex;align-items:center;gap:6px;font:600 13px var(--sans);padding:5px 12px;border:1px solid transparent;border-radius:999px;background:var(--sc);color:#fff;white-space:nowrap;align-self:start}
+.q.s-hold .bd{background:transparent;color:var(--ink);border:1px dashed var(--sc)}
+.q.fin{opacity:.6}
+.stp{list-style:none;display:flex;align-items:center;gap:3px;margin:8px 0 4px;padding:0;max-width:360px}
+.stp li{flex:1;height:6px;border-radius:99px;background:transparent;border:1px solid var(--line)}
+.stp li.d{background:var(--sc);border-color:var(--sc);opacity:.5}
+.stp li.c{background:var(--sc);border-color:var(--sc);height:10px;box-shadow:0 0 0 3px color-mix(in srgb,var(--sc) 25%,transparent)}
+@media(hover:hover) and (pointer:fine){.q:hover{transform:translateY(-3px);border-color:var(--sc);background:color-mix(in srgb,var(--ph) 70%,var(--bg));box-shadow:0 12px 26px -12px color-mix(in srgb,var(--ink) 38%,transparent)}}
+@media(hover:none){.q:active{transform:translateY(-1px);background:color-mix(in srgb,var(--ph) 70%,var(--bg))}}
+@media(prefers-reduced-motion:reduce){.q,.q:hover,.q:active{transition:none;transform:none}}
+@media(max-width:760px){.q{grid-template-columns:minmax(0,1fr) auto}.q .id{grid-column:1;grid-row:1}.q .bd{grid-column:2;grid-row:1}.q>div:nth-child(2){grid-column:1/-1;grid-row:2}}
+/* commission: one card layout for every type */
+.cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+@media(max-width:980px){.cats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.cats{grid-template-columns:minmax(0,1fr)}}
+.cats .cat{display:flex;flex-direction:column;gap:0;padding:10px 10px 0;margin:0;min-width:0}
+.cats .cat:nth-child(even) .frame{order:0}
+.cats .cat .frame{aspect-ratio:4/5;padding:0;border:0;overflow:hidden;background:var(--ph);width:100%}
+.cats .cat .frame img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.cats .cat .frame .ph{height:100%;aspect-ratio:auto;border:0}
+.cat .cb{display:flex;flex-direction:column;flex:1;min-width:0;padding:16px 10px 18px}
+.cat .ch{font-size:22px;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cat .cb .btns{margin-top:auto;padding-top:18px}
+.cat .cb p,.cat .cb li{overflow-wrap:anywhere}
+/* calculator */
+.calc2{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr);gap:28px;align-items:start;margin-top:8px}
+.ch3{margin-top:26px;font-size:20px}
+.cgrid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:10px}
+.cgrid2 .card{margin:0}
+.card.pick{cursor:default;align-items:center;justify-content:space-between}.card.pick>span{flex:1;min-width:0}.card.pick small{display:block}
+.card.opt{padding:0;align-items:stretch;cursor:default}
+.optl{display:flex;gap:12px;align-items:flex-start;flex:1;min-width:0;padding:14px 16px;cursor:pointer}
+.card.opt.na{opacity:.55}.card.opt.na .optl{cursor:not-allowed}
+.optl small{display:block}
+.stp2{display:flex;align-items:center;gap:6px;padding:0 14px 0 0}
+.stp2 input{width:64px;min-height:36px;text-align:center;font:15px var(--sans);background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:var(--r)}
+.stp2 .btn{min-width:36px;padding:0;justify-content:center}
+.cline{border:1px solid var(--line);border-radius:calc(var(--r) + 4px);padding:16px 18px;margin:14px 0;background:color-mix(in srgb,var(--ph) var(--op),transparent);box-shadow:var(--sh)}
+.clh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.clh small{display:block}
+.cls{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.csum{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;border:1px solid var(--line);border-radius:calc(var(--r) + 4px);padding:18px 20px;background:color-mix(in srgb,var(--ph) var(--op),transparent);box-shadow:var(--sh)}
+.csum h3{font-size:20px;margin-bottom:8px}.csum .sl{margin:14px 0}.csum .sum{max-width:none}.csum .sum td small{display:block}.csum .big{font:italic 400 34px var(--serif);color:var(--acc)}
+.slh{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.tbar{display:none}
+@media(max-width:900px){.calc2{grid-template-columns:minmax(0,1fr)}.csum{position:static;max-height:none}
+.tbar{display:flex;position:sticky;bottom:0;z-index:4;justify-content:space-between;align-items:center;gap:12px;margin:18px -5vw 0;padding:10px 5vw calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}.tbar small{display:block;color:var(--mute);line-height:1.2}.tbar b{font:italic 400 24px var(--serif);color:var(--acc)}}
 </style>
 </head>
 <body>
@@ -221,7 +272,7 @@ const sName=k=>{const x=S.statuses.find(a=>a.k===k);return x?L(x):k};
 const vis=()=>S.queue.filter(q=>q.pub);
 const P={
 home:()=>`<section class="hero"><div><div class="eyebrow">Illustrator · Commissions</div><h1>${esc(S.name.split(" ")[0]).replace(/^(\w{3})(.*)$/,"$1<i>$2</i>")}</h1><p class="sub" style="margin-top:18px">${esc(L(S.intro))}</p>${status()}<div class="btns"><a class="btn fill nu" href="#/commission">${t("see")}</a><a class="btn" href="#/contact">${t("contact")}</a></div></div>${img(S.heroImg,"4/5",S.name)}</section>`,
-commission:()=>`<div class="eyebrow">Commission Types</div><h2>${t("com")}</h2>${status()}<div class="cats">`+S.categories.map(c=>{const li=x=>String(L(x)).split("\n").filter(Boolean).map(y=>`<li>${esc(y)}</li>`).join("");return `<article class="cat">${img(c.img,"4/5",L(c.name))}<div><h3 style="font-size:30px">${esc(L(c.name))} ${stb(c)}</h3><div class="price">${esc(priceTxt(c))}</div><p style="margin:0">${esc(L(c.desc))}</p>${L(c.inc)?`<div class="lab">${t("inc")}</div><ul>${li(c.inc)}</ul>`:""}${L(c.add)?`<div class="lab">${t("add")}</div><ul>${li(c.add)}</ul>`:""}<div class="btns"><button class="btn" data-cat="${esc(c.id)}">ดูรายละเอียด</button>${ordBtn(c)}</div></div></article>`}).join("")+"</div>",
+commission:()=>`<div class="eyebrow">Commission Types</div><h2>${t("com")}</h2>${status()}<div class="cats">`+S.categories.map(c=>{const li=x=>String(L(x)).split("\n").filter(Boolean).map(y=>`<li>${esc(y)}</li>`).join("");return `<article class="cat">${img(c.img,"4/5",L(c.name))}<div class="cb"><h3 class="ch">${esc(L(c.name))} ${stb(c)}</h3><div class="price">${esc(priceTxt(c))}</div><p style="margin:0">${esc(L(c.desc))}</p>${L(c.inc)?`<div class="lab">${t("inc")}</div><ul>${li(c.inc)}</ul>`:""}${L(c.add)?`<div class="lab">${t("add")}</div><ul>${li(c.add)}</ul>`:""}<div class="btns"><button class="btn" data-cat="${esc(c.id)}">ดูรายละเอียด</button>${ordBtn(c)}</div></div></article>`}).join("")+"</div>",
 queue:()=>`<div class="eyebrow">Queue</div><h2>${t("queue")}</h2>${status()}<p class="note" style="margin-top:14px">${t("est")}</p><div style="margin-top:12px">`+(vis().length?vis().map(q=>`<div class="q"><div class="id">${esc(q.id)}</div><div><b>${esc(q.label)}</b> · ${esc(q.type)}${pubInfo(q)}<div class="note">${t("st")}: ${dt(q.start)} · ${t("due")}: ${dt(q.due)}${q.moved?` (${esc(q.moved)})`:""}</div>${q.note?`<div class="note">${esc(q.note)}</div>`:""}<div class="note">${t("upd")}: ${dt(q.upd)}</div></div><span class="bd">${esc(sName(q.st))}</span></div>`).join(""):`<div class="ph" style="--r:5/1">${t("noq")}</div>`)+"</div>",
 calendar:()=>{const n=new Date(),y=n.getFullYear(),m=n.getMonth(),f=new Date(y,m,1).getDay(),dm=new Date(y,m+1,0).getDate(),iso=d=>`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
  const ev=[...vis().map(q=>({a:q.start,b:q.due||q.start,l:q.id,k:""})),...vis().filter(q=>q.due).map(q=>({a:q.due,b:q.due,l:"▸"+q.id,k:"due"})),...S.blocks.map(b=>({a:b.from,b:b.to||b.from,l:b.label||t("off"),k:"blk"}))].filter(e=>e.a);
@@ -236,13 +287,19 @@ let QF="",CD=new Date(),CV=innerWidth<760?"agenda":"month";
 function calNav(a){snd("nav");const[k,v]=a.split(":");if(k=="v")CV=v;else if(k=="t")CD=new Date();else{const n=k=="p"?-1:1;CD=CV=="week"?new Date(CD.getFullYear(),CD.getMonth(),CD.getDate()+7*n):new Date(CD.getFullYear(),CD.getMonth()+n,1)}render()}
 const tbd=()=>[...vis().filter(q=>!q.start&&!q.due).map(q=>q.id+" · "+sName(q.st)),...(S.events||[]).filter(e=>e.pub&&!e.from&&!(S.queue.find(q=>q.id==e.qid)||{}).start).map(e=>e.label||e.qid)];
 P.queue=()=>{const steps=S.statuses.filter(s=>s.on&&s.k!="hold"&&s.k!="cancel"),Lq=vis().filter(q=>!QF||q.st==QF),dn=q=>q.st=="done"||q.st=="cancel",
- row=q=>{const i=steps.findIndex(s=>s.k==q.st);return `<div class="q ${dn(q)?"dn":""}"><div class="id">${esc(q.id)}</div><div><b>${esc(q.label)}</b> · ${esc(q.type)}${pubInfo(q)}${prog(q)}<div class="note">${t("st")}: ${dt(q.start)} · ${t("due")}: ${dt(q.due)}${q.moved?` (${esc(q.moved)})`:""}</div>${q.note?`<div class="note">${esc(q.note)}</div>`:""}<div class="note">${t("upd")}: ${dt(q.upd)}</div></div><span class="bd">${esc(sName(q.st))}</span></div>`};
+ row=q=>{const i=steps.findIndex(s=>s.k==q.st);return `<div class="q s-${sk(q.st)}${dn(q)?" fin":""}"><div class="id">${esc(q.id)}</div><div><b>${esc(q.label)}</b> · ${esc(q.type)}${pubInfo(q)}${prog(q)}<div class="note">${t("st")}: ${dt(q.start)} · ${t("due")}: ${dt(q.due)}${q.moved?` (${esc(q.moved)})`:""}</div>${q.note?`<div class="note">${esc(q.note)}</div>`:""}<div class="note">${t("upd")}: ${dt(q.upd)}</div></div><span class="bd">${sico(q.st)}${esc(sName(q.st))}</span></div>`};
  return `<div class="eyebrow">Queue</div><h2>${t("queue")}</h2>${status()}<p class="note" style="margin-top:14px">${t("est")}</p><label class="fld" style="max-width:240px"><span>${tx("กรองตามสถานะ","Filter by status")}</span><select data-qf><option value="">${tx("ทั้งหมด","All")}</option>${S.statuses.filter(s=>s.on).map(s=>`<option value="${s.k}" ${QF==s.k?"selected":""}>${esc(L(s))}</option>`).join("")}</select></label><div class="qs">`+(Lq.length?Lq.filter(q=>!dn(q)).map(row).join("")+(Lq.some(dn)?`<h3 style="margin-top:28px;font-size:18px">${tx("เสร็จแล้ว / ปิดงาน","Completed / closed")}</h3>`+Lq.filter(dn).map(row).join(""):""):`<div class="ph" style="--r:5/1">${t("noq")}</div>`)+"</div>"};
 
 const DEFP={waiting:0,progress:10,sketch:20,line:40,color:65,render:80,review:90,revision:85,done:100};
 function pctOf(q){if(q.st=="done")return 100;if(q.st=="hold"||q.st=="cancel")return null;if(S.pmode=="manual")return q.pct===""||q.pct==null||isNaN(q.pct)?null:Math.min(100,Math.max(0,+q.pct));const s=S.statuses.find(x=>x.k==q.st),v=s&&s.pct!==undefined&&s.pct!==""?s.pct:DEFP[q.st];return v==null||isNaN(v)?null:Math.min(100,Math.max(0,+v))}
-function prog(q){const p=pctOf(q),n=esc(sName(q.st));if(q.st=="hold"||q.st=="cancel")return `<div class="note"><b>${n}</b> — ${q.st=="hold"?tx("พักงานชั่วคราว","paused"):tx("ยกเลิกงาน","cancelled")}</div><div class="pb x"><b></b></div>`;
- return `<div class="note"><b>${n}</b></div><div class="pb" role="progressbar" aria-valuenow="${p??0}" aria-valuemin="0" aria-valuemax="100"><b style="width:${p??0}%"></b></div><div class="note">${p==null?tx("ยังไม่มีข้อมูลความคืบหน้า","No progress data yet"):p+"% "+tx("เสร็จแล้ว","completed")}</div>`}
+const sk=k=>String(k||"x").replace(/[^a-z0-9_-]/gi,"");
+const SI={waiting:'<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',hold:'<path d="M9 6v12M15 6v12"/>',cancel:'<path d="M6 6l12 12M18 6L6 18"/>',done:'<path d="M5 12.5l4.5 4.5L19 7.5"/>'};
+const sico=k=>`<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SI[k]||'<circle cx="12" cy="12" r="4.5" fill="currentColor"/>'}</svg>`;
+function prog(q){const p=pctOf(q);
+ if(q.st=="hold"||q.st=="cancel")return `<div class="note">${q.st=="hold"?tx("พักงานชั่วคราว","Paused"):tx("ยกเลิกงาน","Cancelled")}</div><div class="pb x"><b></b></div>`;
+ const st=S.statuses.filter(s=>s.on&&s.k!="hold"&&s.k!="cancel"),i=st.findIndex(s=>s.k==q.st);let stp="";
+ if(i>=0)stp=`<ol class="stp" aria-label="${tx("ขั้นตอนของงาน","Work steps")}">${st.map((s,j)=>{const c=j<i?"d":j==i?"c":"n";return `<li class="${c}" title="${esc(L(s))}"><span class="sr">${esc(L(s))} — ${c=="d"?tx("เสร็จแล้ว","done"):c=="c"?tx("ขั้นปัจจุบัน","current"):tx("ขั้นถัดไป","upcoming")}</span></li>`}).join("")}</ol><div class="note"><b>${tx("ขั้นที่","Step")} ${i+1}/${st.length}</b>${i<st.length-1?" · "+tx("ถัดไป: ","Next: ")+esc(L(st[i+1])):" · "+tx("ขั้นสุดท้าย","Final step")}</div>`;
+ return stp+`<div class="pb" role="progressbar" aria-valuenow="${p??0}" aria-valuemin="0" aria-valuemax="100"><b style="width:${p??0}%"></b></div><div class="note">${p==null?tx("ยังไม่มีข้อมูลความคืบหน้า","No progress data yet"):p+"% "+tx("เสร็จแล้ว","completed")}</div>`}
 /* sound */
 let AC=null;const SND={soft:[520,.09,"sine"],bubble:[300,.12,"sine",700],pixel:[880,.05,"square"],minimal:[660,.04,"sine"]};
 function snd(k){try{if(ls.g("gt-snd")!=="1"||!S.sound||!S.sound.on)return;AC=AC||new(window.AudioContext||window.webkitAudioContext)();const[f,d,w,f2]=SND[S.sound.theme]||SND.soft,n=AC.currentTime,mu={click:1,pop:1.25,toggle:.85,nav:1.1,ok:1.5}[k]||1,v=Math.min(.5,Math.max(0,S.sound.vol??.3))*.5;
@@ -250,22 +307,100 @@ function snd(k){try{if(ls.g("gt-snd")!=="1"||!S.sound||!S.sound.on)return;AC=AC|
  tone(f*mu,n,d,f2&&f2*mu);if(k=="ok")tone(f*mu*1.5,n+.09,d)}catch(e){}}
 document.addEventListener("click",e=>{if(e.target.closest("[data-tool]"))return;const b=e.target.closest("button,a");if(b)snd(b.dataset.tab||b.dataset.preset?"pop":"click")});
 document.addEventListener("change",e=>{if(e.target.type=="checkbox"||e.target.tagName=="SELECT")snd("toggle")});
-/* calculator (prices come from the same category data as Commission Info) */
-const CUR=()=>(S.calc&&S.calc.cur)||"฿",MONEY=n=>CUR()+Number(n).toLocaleString(tx("th-TH","en-GB"),{maximumFractionDigits:2}),NUMB=c=>c&&c.base!==""&&c.base!=null&&!isNaN(c.base);
+/* ===== Pricing engine (pure: no DOM, no globals) =====
+   line  = base + sum(add-ons) + usage
+   add-on: fixed = price | per = price x qty | pct = base x price / 100
+   usage : personal = 0 | fixed = value | pct = base x value / 100 | no rate set = TBD (not counted)
+   order = sum(lines) ; discount = order x disc% (0-100) ; total = order - discount
+   A missing / negative / non-numeric price is never guessed: it is flagged and left out of the total. */
+/* GT-ENGINE-START */
+const GT={
+ CAP:99,MAXV:1e7,
+ num(v){if(v===""||v==null||typeof v=="boolean")return null;const n=Number(v);return Number.isFinite(n)&&n>=0&&n<=GT.MAXV?n:null},
+ r2(n){return Math.round((n+Number.EPSILON)*100)/100},
+ int(v,lo,hi){const n=Math.floor(Number(v));return Number.isFinite(n)?Math.min(hi,Math.max(lo,n)):lo},
+ cap(v){const n=GT.num(v);return n==null||n<1?GT.CAP:Math.min(GT.CAP,Math.floor(n))},
+ line(c,ln,usage){
+  const base=GT.num(c.base),o={cid:c.id,k:ln.k,base,rows:[],use:null,tbd:[],sub:0,ok:base!=null};
+  if(base==null){o.tbd.push("base");return o}
+  let sub=base;
+  (c.opts||[]).filter(x=>x.on&&ln.o&&ln.o[x.id]).forEach(x=>{const p=GT.num(x.price);
+   if(p==null){o.rows.push({id:x.id,type:x.type,tbd:true});o.tbd.push("opt:"+x.id);return}
+   const q=x.type=="per"?GT.int(ln.o[x.id],1,GT.cap(x.max)):1,amt=GT.r2(x.type=="pct"?base*p/100:x.type=="per"?p*q:p);
+   o.rows.push({id:x.id,type:x.type,p,q,amt});sub+=amt});
+  const u=(usage||[]).find(x=>x.id==ln.u&&x.on);
+  if(u){const v=GT.num(u.val);
+   if(v==null||(u.type!="fixed"&&u.type!="pct")){o.use={id:u.id,tbd:true};o.tbd.push("use:"+u.id)}
+   else{const amt=GT.r2(u.type=="pct"?base*v/100:v);o.use={id:u.id,type:u.type,v,amt};sub+=amt}}
+  o.sub=GT.r2(sub);return o},
+ order(cats,usage,disc,lines){
+  const seen={},out=[];
+  (lines||[]).forEach(ln=>{const c=(cats||[]).find(x=>x.id==ln.c);if(!c)return;seen[c.id]=(seen[c.id]||0)+1;
+   const r=GT.line(c,ln,usage);if(seen[c.id]>GT.cap(c.maxQty)){r.over=true;r.ok=false;r.sub=0}out.push(r)});
+  const sub=GT.r2(out.filter(r=>r.ok).reduce((a,r)=>a+r.sub,0)),d=Math.min(100,Math.max(0,Number(disc)||0)),dv=GT.r2(sub*d/100);
+  return{lines:out,sub,dis:d,dv,total:GT.r2(sub-dv),tbd:out.some(r=>r.tbd.length||r.over)}}
+};
+/* GT-ENGINE-END */
+/* calculator UI (prices come from the same category data as the Commission page; visitors only ever see the published data) */
+const CUR=()=>(S.calc&&S.calc.cur)||"฿",MONEY=n=>CUR()+Number(n).toLocaleString(tx("th-TH","en-GB"),{maximumFractionDigits:2}),NUMB=c=>GT.num(c.base)!=null;
 function priceTxt(c){return NUMB(c)?tx("เริ่มต้น ","From ")+MONEY(c.base):L(c.price)}
-let CC={c:"",o:{},u:"personal"};
-function calcTotals(){const c=S.categories.find(x=>x.id==CC.c);if(!c)return null;if(!NUMB(c))return{c,base:null};const base=+c.base,rows=[];
- (c.opts||[]).filter(o=>o.on&&CC.o[o.id]).forEach(o=>{const q=o.type=="per"?Math.max(1,+CC.o[o.id]||1):1,p=+o.price||0;rows.push([L(o)+(o.type=="per"?" × "+q:o.type=="pct"?" ("+p+"%)":""),o.type=="pct"?base*p/100:p*q])});
- const u=(S.usage||[]).find(x=>x.id==CC.u&&x.on);let com=0,tb=false;if(u){if(u.type=="none"||u.val===""||u.val==null)tb=true;else com=u.type=="pct"?base*(+u.val)/100:+u.val}
- const sub=base+rows.reduce((a,r)=>a+r[1],0)+com,dis=+(S.calc.disc||0),dv=dis>0?sub*dis/100:0;return{c,base,rows,u,com,tb,dis,dv,total:sub-dv}}
-function calcText(){const T=calcTotals();if(!T||T.base==null)return"";return[L(T.c.name),MONEY(T.base),...T.rows.map(r=>r[0]+": "+MONEY(r[1])),T.u?L(T.u)+": "+(T.tb?"TBD":MONEY(T.com)):"Personal use",...(T.dv?["-"+MONEY(T.dv)]:[]),"Estimated total: "+MONEY(T.total)+(T.tb?" (excl. TBD items)":""),"(estimate only, not a quote)"].join("\n")}
-P.calc=()=>{if(!CC.c){const f=S.categories.find(NUMB)||S.categories[0];if(f)CC.c=f.id}const T=calcTotals(),c=T&&T.c,h3=n=>`<h3 style="margin-top:26px;font-size:20px">${n}</h3>`;
- return `<div class="eyebrow">Estimator</div><h2>${t("calc")}</h2>${status()}<p class="note" style="margin-top:14px">${esc(L(S.calc.note))}</p>`+h3("1 · "+tx("ประเภทงาน","ประเภทงาน"))+`<div class="cgrid">${S.categories.map(x=>`<label class="card ${CC.c==x.id?"on":""}"><input type="radio" name="cc" data-cc="cat" value="${esc(x.id)}" ${CC.c==x.id?"checked":""}><span class="ck">✓</span><span><b>${esc(L(x.name))}</b><small class="note">${esc(priceTxt(x))}</small></span></label>`).join("")}</div>`
- +(c?h3("2 · "+tx("ตัวเลือกเสริม","Add-ons"))+((c.opts||[]).filter(o=>o.on).map(o=>`<label class="card ${CC.o[o.id]?"on":""}"><input type="checkbox" data-cc="opt" value="${esc(o.id)}" ${CC.o[o.id]?"checked":""}><span class="ck">✓</span><span style="flex:1"><b>${esc(L(o))}</b><small class="note">${o.type=="pct"?"+"+(o.price||0)+"%":"+"+MONEY(o.price||0)+(o.type=="per"?"/หน่วย":"")}</small></span>${o.type=="per"&&CC.o[o.id]?`<input type="number" min="1" style="max-width:90px" data-cc="qty" data-id="${esc(o.id)}" value="${esc(CC.o[o.id])}">`:""}</label>`).join("")||`<p class="note">${tx("ยังไม่มีตัวเลือกเสริม","No add-ons set")}</p>`):"")
- +h3("3 · "+tx("วัตถุประสงค์การใช้งาน","Usage"))+`<div class="cgrid">${[{id:"personal",th:"ใช้งานส่วนตัว",en:"Personal use"},...(S.usage||[]).filter(u=>u.on)].map(u=>`<label class="card ${CC.u==u.id?"on":""}"><input type="radio" name="cu" data-cc="use" value="${esc(u.id)}" ${CC.u==u.id?"checked":""}><span class="ck">✓</span><span><b>${esc(L(u))}</b></span></label>`).join("")}</div>`
- +h3("4 · "+tx("สรุปราคา","Summary"))+(T&&T.base!=null?`<table class="sum"><tr><td>${tx("ราคาฐาน","Base price")}</td><td>${MONEY(T.base)}</td></tr>${T.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${MONEY(r[1])}</td></tr>`).join("")}${T.u?`<tr><td>${esc(L(T.u))}</td><td>${T.tb?"TBD":MONEY(T.com)}</td></tr>`:""}${T.dv?`<tr><td>${tx("ส่วนลด","Discount")} ${T.dis}%</td><td>−${MONEY(T.dv)}</td></tr>`:""}<tr class="t"><td>${tx("ยอดรวมโดยประมาณ","Estimated total")}</td><td>${MONEY(T.total)}</td></tr></table>${T.tb?`<p class="note">${tx("ยอดรวมยังไม่รวมรายการที่เป็น TBD","Total excludes items marked TBD")}</p>`:""}<div class="btns"><button class="btn" data-calc="reset">Reset</button><button class="btn" data-calc="copy">Copy Estimate</button><button class="btn fill" data-calc="order">${tx("ติดต่อสั่งงาน (คัดลอกสรุปให้)","Contact / Order (copies summary)")}</button></div>`:`<p class="todo">${tx("ราคาฐานของประเภทนี้ยังไม่ได้กำหนด","Base price for this type is not set yet")}</p>`)};
-document.addEventListener("change",e=>{const x=e.target,k=x.dataset&&x.dataset.cc;if(!k)return;if(k=="cat")CC={c:x.value,o:{},u:CC.u};else if(k=="opt"){x.checked?CC.o[x.value]=1:delete CC.o[x.value]}else if(k=="qty")CC.o[x.dataset.id]=Math.max(1,+x.value||1);else CC.u=x.value;render()});
-document.addEventListener("click",e=>{const b=e.target.closest("[data-calc]");if(!b)return;const a=b.dataset.calc;if(a=="reset"){CC={c:"",o:{},u:"personal"};render();return}const s=calcText();(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(()=>toast(t("copied"))).catch(()=>toast(tx("คัดลอกไม่สำเร็จ","Copy failed")));if(a=="order")location.hash="#/contact"});
+let CC={lines:[],n:0};
+const lbl=o=>L(o)||tx("(ยังไม่ตั้งชื่อ)","(unnamed)"),catOf=id=>S.categories.find(x=>x.id==id),catN=id=>CC.lines.filter(l=>l.c==id).length,PERS={id:"personal",th:"ใช้งานส่วนตัว",en:"Personal use"};
+const calcOrder=()=>{CC.lines=CC.lines.filter(l=>catOf(l.c));return GT.order(S.categories,S.usage,S.calc&&S.calc.disc,CC.lines)};
+const optTxt=(o,base)=>{const p=GT.num(o.price);if(p==null)return tx("แอดมินต้องกำหนดราคาก่อน","Admin has not set this price yet");return o.type=="pct"?"+"+p+"% "+tx("ของราคาฐาน","of base")+(base!=null?" = "+MONEY(GT.r2(base*p/100)):""):"+"+MONEY(p)+(o.type=="per"?tx(" ต่อหน่วย"," per unit"):"")};
+const useTxt=(u,base)=>{const v=GT.num(u.val);if(v==null||(u.type!="fixed"&&u.type!="pct"))return tx("ยังไม่กำหนดอัตรา","rate not set");return u.type=="pct"?"+"+v+"% "+tx("ของราคาฐาน","of base")+(base!=null?" = "+MONEY(GT.r2(base*v/100)):""):"+"+MONEY(v)};
+const stepper=(k,id,q,mx)=>`<div class="stp2" role="group" aria-label="${tx("จำนวนหน่วย","Units")}"><button type="button" class="btn sm" data-calc="dec" data-k="${k}" data-id="${esc(id)}" data-fk="dec:${k}:${esc(id)}" aria-label="${tx("ลดจำนวน","Decrease")}" ${q<=1?"disabled":""}>−</button><input type="number" inputmode="numeric" min="1" max="${mx}" step="1" value="${q}" data-cc="qty" data-k="${k}" data-id="${esc(id)}" data-fk="qty:${k}:${esc(id)}" aria-label="${tx("จำนวนหน่วย","Units")}"><button type="button" class="btn sm" data-calc="inc" data-k="${k}" data-id="${esc(id)}" data-fk="inc:${k}:${esc(id)}" aria-label="${tx("เพิ่มจำนวน","Increase")}" ${q>=mx?"disabled":""}>+</button></div>`;
+const lineCard=(ln,i,r)=>{const c=catOf(ln.c),k=ln.k,opts=(c.opts||[]).filter(o=>o.on),us=[PERS,...(S.usage||[]).filter(u=>u.on)],uv=us.some(u=>u.id==ln.u)?ln.u:"personal";
+ const oh=opts.length?opts.map(o=>{const p=GT.num(o.price),on=!!ln.o[o.id]&&p!=null,mx=GT.cap(o.max),q=on?GT.int(ln.o[o.id],1,mx):1;
+  return `<div class="card opt${on?" on":""}${p==null?" na":""}"><label class="optl"><input type="checkbox" data-cc="opt" data-k="${k}" data-id="${esc(o.id)}" data-fk="opt:${k}:${esc(o.id)}" ${on?"checked":""} ${p==null?"disabled":""}><span class="ck" aria-hidden="true">✓</span><span><b>${esc(lbl(o))}</b><small class="note">${esc(optTxt(o,r.base))}</small></span></label>${o.type=="per"&&on?stepper(k,o.id,q,mx):""}</div>`}).join(""):`<p class="note">${tx("ประเภทงานนี้ไม่มีตัวเลือกเสริม","No add-ons for this type")}</p>`;
+ return `<section class="cline" aria-label="${tx("รายการที่","Item")} ${i+1}"><header class="clh"><div><b>${i+1}. ${esc(L(c.name))}</b><small class="note">${esc(priceTxt(c))}${c.eta?" · "+esc(c.eta):""}</small></div><button type="button" class="btn sm" data-calc="rm" data-k="${k}" aria-label="${tx("ลบรายการที่","Remove item")} ${i+1}">${tx("ลบรายการ","Remove")}</button></header>`
+ +(r.over?`<p class="note todo">${tx("เกินจำนวนสูงสุดที่รับได้ของประเภทนี้ ไม่ถูกนับในราคา กรุณาลบรายการนี้","Over the maximum for this type: not counted. Please remove it.")}</p>`:"")
+ +`<div class="lab">${t("add")}</div>${oh}<label class="fld"><span>${tx("วัตถุประสงค์การใช้งาน","Usage")}</span><select data-cc="use" data-k="${k}" data-fk="use:${k}">${us.map(u=>`<option value="${esc(u.id)}" ${uv==u.id?"selected":""}>${esc(L(u))}${u.id=="personal"?"":" ("+esc(useTxt(u,r.base))+")"}</option>`).join("")}</select></label><div class="cls"><span>${tx("รวมรายการนี้","Item subtotal")}</span><b>${r.ok?MONEY(r.sub):"—"}</b></div></section>`};
+function sumBlock(R){
+ if(!R.lines.length)return `<p class="note">${tx("ยังไม่ได้เลือกรายการ","Nothing selected yet")}</p><table class="sum"><tr class="t"><td>${tx("ยอดรวมโดยประมาณ","Estimated total")}</td><td>${MONEY(0)}</td></tr></table>`;
+ const blocks=R.lines.map((r,i)=>{const c=catOf(r.cid),head=`<div class="slh"><span>${i+1}. ${esc(L(c.name))}</span><span>${r.ok?MONEY(r.sub):tx("ยังไม่นับ","excluded")}</span></div>`;
+  if(r.over)return `<div class="sl">${head}<p class="note todo">${tx("เกินจำนวนสูงสุด ไม่ถูกนับในราคา","Over the maximum, not counted")}</p></div>`;
+  if(r.base==null)return `<div class="sl">${head}<p class="note todo">${tx("แอดมินต้องกำหนดราคาก่อน","Admin must set the price first")}</p></div>`;
+  let h=`<tr><td>${tx("ราคาฐาน","Base price")}</td><td>${MONEY(r.base)}</td></tr>`;
+  r.rows.forEach(x=>{const o=(c.opts||[]).find(y=>y.id==x.id),nm=esc(o?lbl(o):x.id);
+   if(x.tbd)h+=`<tr><td>${nm}<small class="note todo">${tx("แอดมินต้องกำหนดราคาก่อน","Price not set by admin")}</small></td><td>TBD</td></tr>`;
+   else h+=`<tr><td>${nm}${x.type=="per"?`<small class="note">${MONEY(x.p)} × ${x.q}</small>`:x.type=="pct"?`<small class="note">${x.p}% × ${MONEY(r.base)}</small>`:""}</td><td>${MONEY(x.amt)}</td></tr>`});
+  if(r.use){const u=(S.usage||[]).find(y=>y.id==r.use.id);
+   h+=r.use.tbd?`<tr><td>${esc(L(u))}<small class="note todo">${tx("ยังไม่กำหนดอัตรา ติดต่อแอดมิน","Rate not set, contact the artist")}</small></td><td>TBD</td></tr>`:`<tr><td>${esc(L(u))}${r.use.type=="pct"?`<small class="note">${r.use.v}% × ${MONEY(r.base)}</small>`:""}</td><td>${MONEY(r.use.amt)}</td></tr>`}
+  else h+=`<tr><td>${tx("ใช้งานส่วนตัว","Personal use")}</td><td>${MONEY(0)}</td></tr>`;
+  return `<div class="sl">${head}<table class="sum">${h}</table></div>`}).join("");
+ const eta=R.lines.map((r,i)=>{const c=catOf(r.cid);return c&&c.eta?`<div class="note">${i+1}. ${esc(L(c.name))}: ${esc(c.eta)}</div>`:""}).join("");
+ return blocks+`<table class="sum"><tr><td>${tx("รวมทุกรายการ","Items total")}</td><td>${MONEY(R.sub)}</td></tr>${R.dv?`<tr><td>${tx("ส่วนลด","Discount")} ${R.dis}%<small class="note">${R.dis}% × ${MONEY(R.sub)}</small></td><td>−${MONEY(R.dv)}</td></tr>`:""}<tr class="t"><td>${tx("ยอดรวมโดยประมาณ","Estimated total")}</td><td class="big">${MONEY(R.total)}</td></tr></table>`
+ +(R.tbd?`<p class="note todo">${tx("ยอดรวมยังไม่รวมรายการที่ยังไม่กำหนดราคาหรืออัตรา กรุณาติดต่อแอดมินเพื่อสอบถามราคา","Total excludes items with no price or rate set. Please contact the artist for those.")}</p>`:"")
+ +(eta?`<div class="lab">${tx("ระยะเวลาโดยประมาณ","Estimated duration")}</div>${eta}<p class="note">${t("est")}</p>`:"")}
+P.calc=()=>{const R=calcOrder(),h3=n=>`<h3 class="ch3">${n}</h3>`;
+ const pick=S.categories.map(c=>{const n=catN(c.id),mx=GT.cap(c.maxQty),ok=NUMB(c),full=n>=mx,can=ok&&!full;
+  return `<div class="card pick${n?" on":""}"><span><b>${esc(L(c.name))}</b> ${stb(c)}<small class="note">${ok?esc(priceTxt(c)):tx("แอดมินต้องกำหนดราคาก่อน","Price not set yet")}${c.eta?" · "+esc(c.eta):""}</small><small class="note">${tx("เลือกแล้ว","Selected")} ${n}${c.maxQty?" / "+mx:""}</small></span><button type="button" class="btn sm${can?" fill":""}" data-calc="add" data-c="${esc(c.id)}" data-fk="add:${esc(c.id)}" ${can?"":"disabled"}>${full?tx("ครบจำนวนสูงสุด","Max reached"):tx("เพิ่มรายการ","Add")}</button></div>`}).join("");
+ return `<div class="eyebrow">Estimator</div><h2>${t("calc")}</h2>${status()}<p class="note" style="margin-top:14px">${esc(L(S.calc.note)||tx("ราคาโดยประมาณ ไม่ใช่ใบเสนอราคาที่ยืนยันแล้ว","Estimate only, not a confirmed quote"))}</p><div class="calc2"><div class="cl">`
+ +h3("1 · "+tx("เลือกประเภทงาน (เพิ่มได้หลายรายการ)","Choose types (you can add several)"))+(pick?`<div class="cgrid2">${pick}</div>`:`<p class="note">${tx("ยังไม่มีประเภทงาน","No commission types yet")}</p>`)
+ +h3("2 · "+tx("รายการที่เลือก","Your order"))+(CC.lines.length?CC.lines.map((ln,i)=>lineCard(ln,i,R.lines[i])).join(""):`<p class="note">${tx("ยังไม่ได้เลือกรายการ กดปุ่มเพิ่มรายการจากด้านบน","Nothing selected. Use the Add buttons above.")}</p>`)
+ +`</div><aside class="csum" id="csum" aria-label="${tx("สรุปราคา","Price summary")}"><h3>3 · ${tx("สรุปราคา","Summary")}</h3>${sumBlock(R)}<div class="btns"><button class="btn" data-calc="reset">Reset</button><button class="btn" data-calc="copy">Copy Estimate</button><button class="btn fill" data-calc="order">${tx("ติดต่อสั่งงาน (คัดลอกสรุปให้)","Contact / Order (copies summary)")}</button></div></aside></div>`
+ +(CC.lines.length?`<div class="tbar"><div><small>${tx("ยอดรวมโดยประมาณ","Estimated total")}</small><b>${MONEY(R.total)}</b></div><button type="button" class="btn sm fill" data-calc="gosum">${tx("ดูสรุป","View summary")}</button></div>`:"")};
+function calcText(){const R=calcOrder();if(!R.lines.length)return"";const o=[];
+ R.lines.forEach((r,i)=>{const c=catOf(r.cid);o.push((i+1)+". "+L(c.name)+(r.ok?": "+MONEY(r.sub):" ("+tx("ยังไม่กำหนดราคา/เกินจำนวน","not priced / over limit")+")"));if(!r.ok)return;o.push("   "+tx("ราคาฐาน","Base")+": "+MONEY(r.base));
+  r.rows.forEach(x=>{const op=(c.opts||[]).find(y=>y.id==x.id);o.push("   + "+(op?lbl(op):x.id)+(x.tbd?": TBD":(x.type=="per"?" ("+MONEY(x.p)+" × "+x.q+")":x.type=="pct"?" ("+x.p+"% "+tx("ของราคาฐาน","of base")+")":"")+": "+MONEY(x.amt)))});
+  if(r.use){const u=(S.usage||[]).find(y=>y.id==r.use.id);o.push("   + "+L(u)+": "+(r.use.tbd?"TBD":MONEY(r.use.amt)))}});
+ o.push(tx("รวมทุกรายการ","Items total")+": "+MONEY(R.sub));if(R.dv)o.push(tx("ส่วนลด","Discount")+" "+R.dis+"%: -"+MONEY(R.dv));
+ o.push(tx("ยอดรวมโดยประมาณ","Estimated total")+": "+MONEY(R.total)+(R.tbd?" ("+tx("ยังไม่รวมรายการที่ยังไม่กำหนดราคา","excl. unpriced items")+")":""));o.push(tx("(ราคาโดยประมาณ ไม่ใช่ใบเสนอราคา)","(estimate only, not a quote)"));return o.join("\n")}
+function calcRender(fk){keep(()=>{});if(fk){const e=document.querySelector('[data-fk="'+fk+'"]');if(e&&!e.disabled)e.focus({preventScroll:true})}}
+document.addEventListener("change",e=>{const x=e.target,k=x.dataset&&x.dataset.cc;if(!k)return;const ln=CC.lines.find(l=>l.k==x.dataset.k);if(!ln)return;
+ if(k=="opt"){x.checked?ln.o[x.dataset.id]=1:delete ln.o[x.dataset.id]}
+ else if(k=="qty"){const c=catOf(ln.c),o=c&&(c.opts||[]).find(y=>y.id==x.dataset.id),mx=GT.cap(o&&o.max);if(Math.floor(Number(x.value))>mx)toast(tx("ใส่ได้สูงสุด "+mx+" หน่วย","Maximum is "+mx+" units"));ln.o[x.dataset.id]=GT.int(x.value,1,mx)}
+ else if(k=="use")ln.u=x.value;
+ calcRender(x.dataset.fk)});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-calc]");if(!b)return;const a=b.dataset.calc,ln=CC.lines.find(l=>l.k==b.dataset.k);
+ if(a=="add"){const c=catOf(b.dataset.c);if(!c||!NUMB(c)||catN(c.id)>=GT.cap(c.maxQty))return;CC.lines.push({k:++CC.n,c:c.id,o:{},u:"personal"});toast(tx("เพิ่ม "+L(c.name)+" แล้ว","Added "+L(c.name)));calcRender(b.dataset.fk);return}
+ if(a=="rm"){CC.lines=CC.lines.filter(l=>l.k!=b.dataset.k);calcRender();return}
+ if(a=="inc"||a=="dec"){const c=ln&&catOf(ln.c),o=c&&(c.opts||[]).find(y=>y.id==b.dataset.id);if(!o)return;ln.o[o.id]=GT.int((+ln.o[o.id]||1)+(a=="inc"?1:-1),1,GT.cap(o.max));calcRender(b.dataset.fk);return}
+ if(a=="gosum"){const m=document.getElementById("csum");if(m)m.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"});return}
+ if(a=="reset"){CC={lines:[],n:0};calcRender();return}
+ const s=calcText();if(!s){toast(tx("ยังไม่ได้เลือกรายการ","Nothing selected"));if(a=="order")location.hash="#/contact";return}
+ (navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(()=>toast(t("copied"))).catch(()=>toast(tx("คัดลอกไม่สำเร็จ","Copy failed")));if(a=="order")location.hash="#/contact"});
 /* calendar: one event = one bar per week row */
 function evs(){const o=[];
  vis().forEach(q=>{const a=q.start||q.due;if(!a)return;o.push({id:"q:"+q.id,a,b:q.due&&q.start?q.due:a,l:q.id,s:sName(q.st),k:q.st,n:q.note,d:q.due,ty:q.type})});
@@ -354,7 +489,10 @@ queue:()=>{const s=S.status,opts=Object.entries(STAT).map(([k,v])=>[k,v[0]]).con
  return "<h3>สถานะการรับงาน</h3>"+SEL("status.k","สถานะ",opts)+(s.k=="custom"?F2x("status","ข้อความสถานะเอง"):"")+F2("status.note","ข้อความสั้น (ไม่บังคับ)")+"<h3>คิวงาน</h3>"+S.queue.map((q,i)=>`<div class="blk2"><div class="row2">${F(`queue.${i}.id`,"หมายเลขคิว")}${F(`queue.${i}.label`,"ชื่อที่แสดง (นามแฝง/ตัวย่อ/เลขคิว)")}</div><div class="row2">${F(`queue.${i}.type`,"ประเภทงาน")}${SEL(`queue.${i}.st`,"สถานะ",S.statuses.filter(x=>x.on).map(x=>[x.k,x.en]))}</div><div class="row2">${F(`queue.${i}.start`,"เริ่มงาน","date")}${F(`queue.${i}.due`,"กำหนดส่งโดยประมาณ (ว่าง = TBD)","date")}</div>${F(`queue.${i}.moved`,"เหตุผลถ้าเลื่อนกำหนดส่ง")}${F(`queue.${i}.note`,"หมายเหตุสาธารณะ")}${F(`queue.${i}.priv`,"หมายเหตุภายใน (ไม่แสดงสาธารณะ)")}${F(`queue.${i}.cust`,"ชื่อลูกค้า")}${F(`queue.${i}.acct`,"ชื่อบัญชีลูกค้า")}${SEL(`queue.${i}.chan`,"ช่องทางรับงาน",[["","—"],...["Facebook","X/Twitter","VGen","Discord","Instagram","Email","Other"].map(x=>[x,x])])}${q.chan=="Other"?F(`queue.${i}.chanOther`,"ชื่อช่องทาง"):""}${F(`queue.${i}.title`,"ชื่อ/รายละเอียดงาน")}<div class="note">Show on public page (all off by default):</div>${TOG(`queue.${i}.showCust`,"ชื่อลูกค้า")}${TOG(`queue.${i}.showAcct`,"ชื่อบัญชี")}${TOG(`queue.${i}.showChan`,"ช่องทางรับงาน")}${TOG(`queue.${i}.showTitle`,"ชื่องาน")}${TOG(`queue.${i}.pub`,"แสดงคิวนี้สาธารณะ")}${AB("queue",i)}</div>`).join("")+`<button class="btn sm" data-a="add" data-arr="queue">+ เพิ่มคิว</button><h3 style="margin-top:28px">วันหยุด / ช่วงไม่รับงาน</h3>`+S.blocks.map((b,i)=>`<div class="blk2"><div class="row2">${F(`blocks.${i}.from`,"ตั้งแต่","date")}${F(`blocks.${i}.to`,"ถึง","date")}</div>${F(`blocks.${i}.label`,"Public label")}${AB("blocks",i)}</div>`).join("")+`<button class="btn sm" data-a="add" data-arr="blocks">+ เพิ่มช่วงไม่รับงาน</button><p class="note">Statuses rename/enable: edit in Backup JSON for now.</p>`},
 backup:()=>`<div class="bar"><button class="btn" data-a="exp">ส่งออก JSON</button><label class="btn">นำเข้า JSON<input type="file" accept=".json" hidden id="imp"></label></div><p class="note">Contains content/settings only. No passwords or tokens. Import validates structure and asks before overwriting the draft.</p>`};
 const progAdm=()=>`<h3 style="margin-top:28px">Progress %</h3>${SEL("pmode","โหมดเปอร์เซ็นต์",[["auto","อัตโนมัติตามสถานะ"],["manual","กรอกเองรายคิว"]])}<p class="note">Display estimates you set. Not exact work done or time left. Completed always shows 100%; On Hold/Cancelled show no percent.</p>`+S.statuses.map((s,i)=>F(`statuses.${i}.pct`,`${s.en} %`,"number")).join("")+(S.pmode=="manual"?S.queue.map((q,i)=>F(`queue.${i}.pct`,`${q.id} % (0–100, blank = no data)`,"number")).join(""):"");
-A.calc=()=>F("calc.cur","สัญลักษณ์สกุลเงิน")+F2("calc.note","ข้อความอธิบายราคาประเมิน",1)+F("calc.disc","ส่วนลด % (0 = ไม่มี)","number")+"<h3>Per category (base price is the same one shown on Commission page)</h3>"+S.categories.map((c,i)=>`<div class="blk2"><b>${esc(L(c.name))}</b>${F(`categories.${i}.base`,"ราคาฐาน (ตัวเลข; ว่าง = ยังไม่กำหนด)","number")}${(c.opts||[]).map((o,j)=>`<div class="blk2">${F2(`categories.${i}.opts.${j}`,"ตัวเลือก")}${SEL(`categories.${i}.opts.${j}.type`,"รูปแบบราคา",[["fixed","คงที่"],["per","ต่อหน่วย"],["pct","% ของราคาฐาน"]])}${F(`categories.${i}.opts.${j}.price`,"ราคา / %","number")}${TOG(`categories.${i}.opts.${j}.on`,"เปิดใช้งาน")}${AB(`categories.${i}.opts`,j)}</div>`).join("")}<button class="btn sm" data-a="add" data-arr="categories.${i}.opts">+ เพิ่มตัวเลือก</button></div>`).join("")+"<h3>Commercial usage</h3>"+(S.usage||[]).map((u,i)=>`<div class="blk2">${F2(`usage.${i}`,"ป้ายชื่อ")}${SEL(`usage.${i}.type`,"รูปแบบราคา",[["none","TBD (ยังไม่กำหนดอัตรา)"],["fixed","คงที่"],["pct","% ของราคาฐาน"]])}${F(`usage.${i}.val`,"จำนวนเงิน / %","number")}${TOG(`usage.${i}.on`,"เปิดใช้งาน")}${AB("usage",i)}</div>`).join("")+`<button class="btn sm" data-a="add" data-arr="usage">+ เพิ่มตัวเลือกเชิงพาณิชย์</button>`;
+A.calc=()=>{const bad=v=>v!==""&&v!=null&&GT.num(v)==null,blank=v=>v===""||v==null,wr=m=>`<p class="note todo">${m}</p>`,dis=Number(S.calc.disc);
+ return `<p class="note">ลูกค้าเห็นราคาจากข้อมูลที่เผยแพร่แล้วเท่านั้น การแก้ไขที่นี่เป็นร่างจนกว่าจะกด "เผยแพร่การเปลี่ยนแปลง" ราคาที่เว้นว่างหรือไม่ถูกต้องจะไม่ถูกเดา ลูกค้าจะเห็นว่าแอดมินต้องกำหนดราคาก่อน</p>`
+ +F("calc.cur","สัญลักษณ์สกุลเงิน")+F2("calc.note","ข้อความอธิบายราคาประเมิน",1)+F("calc.disc","ส่วนลด % ของยอดรวมทั้งออเดอร์ (0–100, 0 = ไม่มี)","number")+(!blank(S.calc.disc)&&!(dis>=0&&dis<=100)?wr("ส่วนลดต้องอยู่ระหว่าง 0–100 ระบบจะปรับให้อยู่ในช่วงนี้อัตโนมัติ"):"")
+ +"<h3>ราคาและตัวเลือกต่อประเภทงาน (ราคาฐานเป็นตัวเดียวกับที่แสดงในหน้าประเภทงาน)</h3>"+S.categories.map((c,i)=>`<div class="blk2"><b>${esc(L(c.name))}</b>${F(`categories.${i}.base`,"ราคาฐาน (ตัวเลข ≥ 0; ว่าง = ยังไม่กำหนด)","number")}${bad(c.base)?wr("ราคาฐานไม่ถูกต้อง จะถือว่ายังไม่กำหนดราคา"):""}${F(`categories.${i}.maxQty`,"จำนวนรายการสูงสุดต่อออเดอร์ (ว่าง = ไม่จำกัด สูงสุด 99)","number")}${(c.opts||[]).map((o,j)=>`<div class="blk2">${F2(`categories.${i}.opts.${j}`,"ตัวเลือก")}${SEL(`categories.${i}.opts.${j}.type`,"รูปแบบราคา",[["fixed","คงที่"],["per","ต่อหน่วย"],["pct","% ของราคาฐาน"]])}${F(`categories.${i}.opts.${j}.price`,"ราคา / %","number")}${o.on&&blank(o.price)?wr("ยังไม่ได้กำหนดราคา ลูกค้าจะเลือกตัวเลือกนี้ไม่ได้"):bad(o.price)?wr("ราคาไม่ถูกต้อง (ต้องเป็นตัวเลข 0 ขึ้นไป) จะถือว่ายังไม่กำหนดราคา"):""}${o.type=="per"?F(`categories.${i}.opts.${j}.max`,"จำนวนหน่วยสูงสุด (ว่าง = 99)","number"):""}${TOG(`categories.${i}.opts.${j}.on`,"เปิดใช้งาน")}${AB(`categories.${i}.opts`,j)}</div>`).join("")}<button class="btn sm" data-a="add" data-arr="categories.${i}.opts">+ เพิ่มตัวเลือก</button></div>`).join("")+"<h3>Commercial usage</h3>"+(S.usage||[]).map((u,i)=>`<div class="blk2">${F2(`usage.${i}`,"ป้ายชื่อ")}${SEL(`usage.${i}.type`,"รูปแบบราคา",[["none","TBD (ยังไม่กำหนดอัตรา)"],["fixed","คงที่"],["pct","% ของราคาฐาน"]])}${F(`usage.${i}.val`,"จำนวนเงิน / %","number")}${u.on&&u.type!="none"&&GT.num(u.val)==null?wr("ยังไม่ได้กำหนดอัตราหรือค่าไม่ถูกต้อง ลูกค้าจะเห็นเป็น TBD และไม่ถูกนับในยอดรวม"):""}${TOG(`usage.${i}.on`,"เปิดใช้งาน")}${AB("usage",i)}</div>`).join("")+`<button class="btn sm" data-a="add" data-arr="usage">+ เพิ่มตัวเลือกเชิงพาณิชย์</button>`};
 const SEG=(p,lab,o)=>`<div class="fld"><span>${lab}</span><div class="seg">${o.map(x=>`<button type="button" class="${get(p)==x[0]?"on":""}" data-seg="${p}:${x[0]}" aria-pressed="${get(p)==x[0]}">${get(p)==x[0]?"✓ ":""}${x[1]}</button>`).join("")}</div></div>`;
 const TOG=(p,lab)=>`<label class="tog"><input type="checkbox" role="switch" data-c="${p}" ${get(p)?"checked":""}><i></i><span>${lab}</span></label>`;
 const RNG=(p,l,a,b,st)=>`<label class="fld"><span>${l}: <b>${get(p)}</b></span><input type="range" min="${a}" max="${b}" step="${st}" value="${get(p)}" data-p="${p}" oninput="this.previousElementSibling.lastElementChild.textContent=this.value"></label>`;
@@ -400,7 +538,7 @@ document.addEventListener("click",e=>{const g=x=>e.target.closest(x);let b;if(b=
 document.addEventListener("input",e=>{const x=e.target;if(x.dataset.qf!==undefined){QF=x.value;render();return}
  if(x.dataset.p){const v=x.type=="number"||x.type=="range"?(x.value===""?"":+x.value):x.value;if(/^queue\.(\d+)\.(st|due|moved|note)$/.test(x.dataset.p))S.queue[RegExp.$1].upd=TD();set(x.dataset.p,v);
   if(x.type=="color"){const h=document.querySelector('[data-hex="'+x.dataset.p+'"]');if(h)h.value=x.value}
-  if(["status.k","effect.type","fh","fb"].includes(x.dataset.p)||/queue\.\d+\.chan$/.test(x.dataset.p))render()}
+  if(["status.k","effect.type","fh","fb"].includes(x.dataset.p)||/queue\.\d+\.chan$/.test(x.dataset.p)||/\.opts\.\d+\.type$/.test(x.dataset.p))render()}
  if(x.dataset.hex&&/^#[0-9a-f]{6}$/i.test(x.value)){set(x.dataset.hex,x.value.toLowerCase());const q=document.querySelector('[data-p="'+x.dataset.hex+'"]');if(q)q.value=x.value.toLowerCase()}
  if(x.dataset.c)set(x.dataset.c,x.checked?1:0)});
 document.addEventListener("click",e=>{let b=e.target.closest("[data-seg]");if(b){const i=b.dataset.seg.indexOf(":");set(b.dataset.seg.slice(0,i),b.dataset.seg.slice(i+1));render();return}
